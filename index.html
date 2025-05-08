@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporacion Devesa de Venezuela</title>
+    <style>
+        /* Estilos generales del cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Fondo oscuro */
+            color: #f0f0f0; /* Texto claro */
+        }
+        /* Estilos del encabezado */
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        /* Estilos de navegación */
+        nav {
+            margin: 10px 0;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: background-color 0.3s, border 0.3s;
+        }
+        nav a:hover, nav a.selected {
+            background-color: #00509e; /* Color al pasar el mouse */
+            border: 2px solid #ffffff; /* Borde al pasar el mouse */
+        }
+        /* Estilos del banner */
+        .banner {
+            background-image: url('imagenes/alfi.jpg'); /* Imagen de fondo */
+            height: 300px;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(3, 3, 3);
+            font-size: 24px;
+            text-shadow: 2px 2px 4px black; /* Sombra del texto */
+        }
+        /* Estilos de las secciones de contenido */
+        .contenido {
+            padding: 20px;
+            text-align: left;
+            display: none; /* Ocultar secciones por defecto */
+        }
+        /* Estilos de la galería */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+            gap: 15px; /* Espacio entre imágenes */
+            margin-top: 20px;
+        }
+        .galeria img {
+            width: 100%; /* Ancho completo de la imagen */
+            border-radius: 8px; /* Bordes redondeados */
+        }
+        /* Estilos de los botones */
+        .boton {
+            background-color: #00509e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .boton:hover {
+            background-color: #003366; /* Color al pasar el mouse */
+            transform: translateY(-2px); /* Efecto de elevación */
+        }
+        /* Estilos del pie de página */
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        /* Estilos para el formulario de contacto */
+        .container {
+            max-width: 600px;
+            margin: 20px auto; /* Centrar el formulario */
+            background: rgb(12, 12, 12);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 10px rgba(211, 206, 139, 0.1);
+            display: none; /* Ocultar el formulario por defecto */
+            width: 100%; /* Ajustar al ancho completo */
+        }
+        h3 {
+            color: #fdfdfd;
+            text-align: center; /* Centrar el título */
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #f1f3f5;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%; /* Ajustar al ancho completo */
+            padding: 10px;
+            margin: 30px -11px; /* Espaciado superior e inferior */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        input[type="submit"] {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 25px;
+            display: block;  
+            margin-top: 10px; /* Margen superior */
+            width: 100%; /* Ancho completo para el botón */
+        }
+        input[type="submit"]:hover {
+            background-color: #d35400; /* Color al pasar el mouse */
+        }
+    </style>
+    <script>
+        // Función para establecer el enlace activo en la navegación
+        function setActive(link) {
+            const links = document.querySelectorAll('nav a');
+            links.forEach(l => l.classList.remove('selected')); // Eliminar clase 'selected' de todos los enlaces
+            link.classList.add('selected'); // Agregar clase 'selected' al enlace activo
+        }
+
+        // Función para mostrar u ocultar el formulario de contacto
+        function mostrarFormulario() {
+            const formulario = document.getElementById("formularioContacto");
+            formulario.style.display = formulario.style.display === "none" || formulario.style.display === "" ? "block" : "none"; // Alternar visibilidad
+        }
+
+        // Función para mostrar la sección correspondiente
+        function mostrarSeccion(id) {
+            const secciones = document.querySelectorAll('.contenido, .container');
+            secciones.forEach(seccion => seccion.style.display = 'none'); // Ocultar todas las secciones
+            document.getElementById(id).style.display = 'block'; // Mostrar la sección seleccionada
+        }
+
+        // Función para manejar el clic en los enlaces de navegación
+        function manejarClick(id, link) {
+            setActive(link); // Establecer el enlace como activo
+            mostrarSeccion(id); // Mostrar la sección correspondiente
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Corporacion Devesa de Venezuela</h1>
+    <nav>
+        <!-- Enlaces de navegación -->
+        <a href="#¿Quienes somos?" onclick="manejarClick('nosotros', this)">¿Quienes somos?</a>
+        <a href="#¿Que Hacemos?" onclick="manejarClick('queHacemos', this)">¿Que Hacemos?</a>
+        <a href="#Materias Primas" onclick="manejarClick('materiasPrimas', this)">Materias Primas</a>
+        <a href="#Productos" onclick="manejarClick('productos', this)">Productos</a>
+        <a href="#Dirijido" onclick="manejarClick('dirijido', this)">Dirijido</a>
+        <a href="#galeria" onclick="setActive(this)">Galería</a>
+        <a href="#contacto" onclick="setActive(this); mostrarFormulario()">Contacto</a>
+        <a href="#ubicacion" onclick="manejarClick('ubicacion', this)">Ubicanos</a>
+    </nav>
+</header>
+
+<div class="banner">
+    <h2>Realizamos tus Productos de Goma</h2>
+</div>
+
+<div id="formularioContacto" class="container">
+    <h3>Formulario de Contacto</h3>
+    <form>
+        <label for="nombre">Nombre y Apellido o Nombre de la Empresa:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required>
+        
+        <label for="nota">Nota:</label>
+        <textarea id="nota" name="nota" rows="4" required></textarea>
+        
+        <input type="submit" value="Enviar"> <!-- Botón de envío -->
+    </form>
+</div>
+
+<div class="contenido" id="inicio">
+    <h2>Bienvenido a Corporacion</h2>
+    <p>En esta página, puedes explorar diversas imágenes sobre todo el trabajo al que nos dedicamos.</p>
+    <button class="boton" onclick="location.href='#galeria'">Ver Galería</button>
+</div>
+
+<div id="nosotros" class="contenido">
+    <h3>Nosotros</h3>
+    <p>Desde el año 1968, el Sr. Jaime Devesa se dedicaba a la fabricación de la empacadura Sello Flex, destinada al área de la plomería. En 1974, fue fundada Industrias Devesa, C.A., con la misión de fabricar artículos de caucho por sistemas de inyección, compresión y extrusión. Ofrecemos más de 5.000 productos en línea, fabricados bajo estrictas normas de calidad.</p>
+</div>
+
+<div id="queHacemos" class="contenido">
+    <h3>¿Qué Hacemos?</h3>
+    <p>Nos especializamos en la fabricación de productos de goma de alta calidad para diversas aplicaciones industriales, incluyendo sellos, empaques y componentes personalizados, garantizando la satisfacción del cliente.</p>
+</div>
+
+<div id="materiasPrimas" class="contenido">
+    <h3>Materias Primas</h3>
+    <p>En la empresa Industrias Devesa, C.A., se utilizan diversos tipos de caucho, cada uno con características particulares para aplicaciones específicas. Estos incluyen:</p>
+
+        <p>•    Neopreno (policloropreno)</p>
+        <p>•    EPDM (etileno propileno dieno monómero)</p>
+        <p>•    SBR (estireno butadieno)</p>
+        <p>•    Caucho Natural (polisopropeno)</p>
+        <p>•    NBR (nitrilo acrílico)</p>
+        <p>•    Hipalon (polietileno cloro-sulfurado)</p>
+        <p>•    Silicon (polisiloxano)</p>
+        <p>•    Butilo (poliisobutileno)</p>
+
+        <p>Casi todos estos cauchos permiten la fabricación de productos de goma con una dureza que varía entre 35º y 85º shore A para los sólidos, y entre 20º y 95º shore 00 para los productos celulares. Es relevante mencionar que, aunque la mayoría de los productos de goma son de color negro, también es posible fabricarlos en otros colores. Las limitaciones para la coloración de las gomas dependen de la selección adecuada del tipo de caucho y del proceso de fabricación utilizado.</p>
+</div>
+
+<div id="productos" class="contenido">
+    <h3>Productos</h3>
+    <p>Productos Terminados
+        Industrias Devesa, C.A. cuenta con un departamento técnico altamente capacitado para diseñar y desarrollar una variedad de productos que satisfacen las diversas demandas del mercado. Entre los productos ofrecidos se encuentran: <p></p>
+      <p>  •    Perfiles sólidos. </p>
+      <p>  •	Perfiles celulares (esponjosos). </p>
+      <p>  •	Perfiles sólidos y celulares (biocomponentes). </p>
+      <p>  •	Perfiles sólidos, celulares e inserto metálico (tricomponente). </p>
+      <p>  •	Perfiles sólidos con felpa de poliéster aplicada mediante deposición electrostática (flock).</p>
+      <p>  •	Artículos moldeados por compresión. </p>
+      <p>  •	Artículos moldeados por inyección. </p>
+      <p>  •	Artículos moldeados con inserto metálico (goma metal). </p>
+      <p>  •	Artículos moldeados con refuerzos de tejidos de algodón poliéster, nylon y fibra de kevlar.</p> 
+      <p>  Los productos mencionados son utilizados en diversos sectores, incluyendo la construcción, la industria naval, la automotriz y otros ámbitos industriales.</p>
+    
+</div>
+
+<div id="dirijido" class="contenido">
+    <h3>Dirijido</h3>
+    <p>Industrias Devesa, C.A. tiene una sólida trayectoria en la fabricación de artículos de goma para el sector de la construcción. Desde 1968, hemos desarrollado soluciones innovadoras, comenzando con nuestro primer producto, el Sello-Flex, una empacadura de neopreno diseñada para tuberías de aguas negras. Este producto está registrado por ID y cuenta con la aprobación sanitaria de INOS.</p>
+       <p>El Sello-Flex es una solución de compresión eficiente para drenajes en viviendas y edificios, que reemplaza el antiguo método de calafateado con estopas alquitranadas. Está diseñado para ser compatible con tuberías de hierro, PVC y concreto, y se fabrica utilizando neopreno y caucho sintético, mediante la tecnología de Dupont Dow Elastomers. Este producto ofrece ventajas tanto cualitativas como cuantitativas, logrando una reducción de más del 90% en costos de mano de obra y tiempo de instalación. Es el producto más utilizado en la industria.</p>
+        <p>Se estima que alrededor del 85% de las grandes edificaciones en Caracas y otras regiones de Venezuela han sido construidas utilizando perfiles y elementos de aislamiento de Industrias Devesa, C.A. Entre los proyectos destacados se encuentran el Parque Central, Torre La Previsora, Torre Europa, Torre Británica, Parque Cristal, Centro Lido y Torre Country. Además, ofrecemos sellos de neopreno para tuberías de concreto, aprobados por INOS, que van desde 6” hasta 106’’. También fabricamos perfiles de neopreno y EPDM de Dupont Dow para fachadas de vidrio tipo Curtain Wall y ventanas deslizantes o proyectantes.</p>
+       <p> Sector Naval </p>
+       <p> En el ámbito naval, Industrias Devesa produce una variedad de artículos de goma mediante extrusión y moldeado, tales como: </p>
+        <p> •	Defensas para muelles. </p>
+        <p> •	Defensas perimetrales para embarcaciones. </p>
+        <p> •	Protectores de impacto tipo fender para barcos. </p>
+        <p> •	Empacaduras sólidas y celulares para sellos de agua y combustibles (tanqueros, pesqueros, cargueros, etc.). </p>
+        <p>•	Diversos accesorios moldeados por inyección, incluyendo fuelles, empacaduras, gorros para bujías y bujes.</p>
+        <p>Sector Automotriz</p>
+        <p>para el sector automotriz, la empresa fabrica perfiles celulares, sólidos, bicomponentes y tricomponentes, que son utilizados en el sellado de puertas, maleteros y vidrios fijos (laterales y traseros).</p>
+             <p>En el motor y en otras partes de la carrocería y suspensión, se emplean diversos elementos de goma, como goma-metal y goma con refuerzos de tejido.</p>
+       <p> Sector Industrial </p>
+       <p>En el sector industrial, Industrias Devesa ofrece:</p>
+       <p> •	Perfiles de diversas formas, tamaños y materiales.</p>
+       <p> •	Perfiles tipo matabordes para tamices en areneras y cementeras.</p>
+       <p> •	Gomas raspadoras para bandas transportadoras.</p>
+       <p> •	Sellos tipo V o U para autoclaves, calderas y hornos, fabricados en silicona, EPDM, neopreno y Hypalon.</p>
+       <p> •	Intercambiadores de calor.</p>
+       <p> •	Sistemas de refrigeración industrial.</p>
+       <p> •	Industria eléctrica: aisladores para alta y baja tensión.</p>
+       <p> •	Empacaduras y sellos industriales, incluyendo sellos para válvulas mariposas y diafragmas con diferentes tipos de refuerzos.</p>
+        <p>Estamos comprometidos con la calidad y la innovación en cada uno de nuestros productos, garantizando soluciones efectivas para nuestros clientes
+        </p>
+</div>
+
+<div id="ubicacion" class="contenido">
+    <h3>Ubicación</h3>
+    <p>Estamos ubicados en el corazón de Venezuela, facilitando el acceso a nuestros clientes y asegurando una distribución eficiente de nuestros productos a nivel nacional.</p>
+</div>
+
+<div class="galeria" id="galeria">
+    <img src="imagenes/1.jpg" alt="Descripción de la imagen 1">
+    <img src="imagenes/1.webp" alt="Descripción de la imagen 2">
+    <img src="imagenes/3.jpg" alt="Descripción de la imagen 3">
+    <img src="imagenes/black-man-moving-furniture.jpg" alt="Descripción de la imagen 4">
+    <img src="imagenes/hand-touching-tree-moss-close-up.jpg" alt="Descripción de la imagen 5">
+    <img src="imagenes/que-son-las-gomas-sinteticas-o-caucho-sintetico-usadas-en-la-fabricacion-de-llantas.jpg" alt="Descripción de la imagen 6">
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 Corporacion Devesa de Venezuela. Todos los derechos reservados.</p>
+</div>
+     
+</body>
+</html>
